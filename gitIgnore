@@ -1,0 +1,42 @@
+[core]
+    autocrlf = false
+    editor = code --wait
+[diff]
+    tool = intellij
+[difftool]
+    prompt = false
+[difftool "intellij"]
+    cmd = cmd.exe //c "path"
+[push]
+    default = current
+[branch]
+    autosetupmerge = true
+[url "https://"]
+    insteadOf= git://
+[alias]
+    i = "log --no-merges"
+    lg = "log --format='%Cred%h%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset%C(yellow)%d%Creset' --no-merges"
+    lgp = "log -p"
+    st = status
+    ci = commit
+    fci = ci --amend --no-edit -a
+    undo-ci = reset --soft HEAD^
+    unstage = reset HEAD
+    br = branch
+    mkbr = checkout -b
+    rmbr = branch -default
+    rmbrf = branch -D
+    co = checkout
+    df = diff -w -b
+    mg = merge --no-ff
+    mt = mergtool --no-prompt
+    set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+    mvtag = "!f() {git tag -d $` && git push origin :refs/tags/$1 && git tag $1 && git push --tags; }; f"
+    sdiff = !git diff && git submodule foreach 'git diff'
+    spush = push --recurse-submodule=on-demand
+    spull = pull --recurse-submodules
+    supdate =  submodule update --remore --merge
+    sf =  submodule foreach
+    release =!sh ./bin/git release $1
+[merge "ours"]
+    driver = true
